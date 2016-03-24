@@ -11,7 +11,10 @@ class ExtendsHelper extends AbstractBlockHelper
         echo '<pre>'.var_dump($this->blockRegistry).'</pre>';
 
         // find parent template
+        $parentTpl = '{{> '.$parentName.'}}';
+        $compiled =  LightnCandy::compile($parentTpl, $sameOptions);
+        
         // render parent template
-
+        return LightnCandy::prepare($comopiled)($options['data']);
     }
 }
