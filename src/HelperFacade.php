@@ -24,22 +24,22 @@ class HelperFacade
         return call_user_func_array([$helper, 'call'], $args);
     }
 
-    public static function extends()
+    public static function extendsHelper()
     {
         $helper = 'Handlebars\\Inheritance\\ExtendsHelper';
-        Handlebars\Inheritance\HelperFacade::callHelper($helper, func_get_args());
+        return Handlebars\Inheritance\HelperFacade::callHelper($helper, func_get_args());
     }
 
-    public static function block()
+    public static function blockHelper()
     {
         $helper = 'Handlebars\\Inheritance\\BlockHelper';
-        Handlebars\Inheritance\HelperFacade::callHelper($helper, func_get_args());
+        return Handlebars\Inheritance\HelperFacade::callHelper($helper, func_get_args());
     }
 
-    public static function override()
+    public static function overrideHelper()
     {
         $helper = 'Handlebars\\Inheritance\\OverrideHelper';
-        Handlebars\Inheritance\HelperFacade::callHelper($helper, func_get_args());
+        return Handlebars\Inheritance\HelperFacade::callHelper($helper, func_get_args());
     }
 
 }

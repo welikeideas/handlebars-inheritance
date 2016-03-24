@@ -2,19 +2,24 @@
 
 namespace Handlebars\Inheritance;
 
+use LightnCandy\LightnCandy;
+
 class ExtendsHelper extends AbstractBlockHelper
 {
     public function call($parentName, $options)
     {
-        echo '<pre>'.var_dump($this->blockRegistry).'</pre>';
+        // populate the block registery
         $options['fn']();
-        echo '<pre>'.var_dump($this->blockRegistry).'</pre>';
 
         // find parent template
-        $parentTpl = '{{> '.$parentName.'}}';
-        $compiled =  LightnCandy::compile($parentTpl, $sameOptions);
-        
+        $handlebarsContext = LightnCandy::getContext();
+        $template = $handlebarsContext['partials'][$parentName];
+
+        // compile the partial
+        $compiled = LightnCandy::compile($template, $handlebarsContext);
+        $render = LightnCandy::prepare($compiled);
+
         // render parent template
-        return LightnCandy::prepare($comopiled)($options['data']);
+        return $render($options['data']['root']);
     }
 }
